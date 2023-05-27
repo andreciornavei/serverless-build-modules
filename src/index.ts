@@ -11,9 +11,11 @@ import { list } from 'wild-wild-path';
 import { hideBin } from 'yargs/helpers';
 import { resolve, dirname, relative, join } from 'path';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
+import fileDirName from './utils';
 
 import { parseTags } from './tags';
 import { CliArgsType } from './types';
+const { __dirname } = fileDirName(import.meta);
 
 // get all provided arguments
 const args = yargs(hideBin(process.argv)).argv as unknown as CliArgsType;
