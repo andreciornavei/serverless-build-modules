@@ -45,6 +45,7 @@
     "url": "git+https://github.com/andreciornavei/serverless-build-modules.git"
   },
   "dependencies": {
+    "deepmerge": "4.3.1",
     "glob": "10.2.6",
     "lodash": "4.17.21",
     "shelljs": "0.8.5",
