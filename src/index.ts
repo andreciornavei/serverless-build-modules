@@ -28,6 +28,10 @@ if (errors.length > 0) {
 // execute cli function
 (async () => {
   try {
+    // det devmode
+    const devmode = args.dev || false;
+    console.log('devmode =', String(devmode));
+
     const __dirname = shell.pwd().stdout;
     console.log('entrypoint execution directory', __dirname);
 
@@ -66,8 +70,8 @@ if (errors.length > 0) {
       const servicedata = readFileSync(servicefile, { encoding: 'binary' });
       let servicejson = yaml.parse(servicedata, { customTags: parseTags });
 
-      // clean build file before starting build
-      await shell.exec(`rm ${resolve(servicepath, 'serverless.build.yml')}`);
+      // clean build file before starting build (only in devmode)
+      if (devmode) await shell.exec(`rm ${resolve(servicepath, 'serverless.build.yml')}`);
 
       // iterate all modules of current service
       // * ignore other service folder (even child/subchild)
@@ -104,8 +108,8 @@ if (errors.length > 0) {
         // merge module to service object
         servicejson = deepmerge(servicejson, modulejson);
       }
-      // convert json to yml
-      writeFileSync(`${resolve(servicepath, 'serverless.build.yml')}`, yaml.stringify(servicejson));
+      // convert json to yml [add .build suffix if devmode is enabled]
+      writeFileSync(`${resolve(servicepath, `serverless${devmode ? '.build' : ''}.yml`)}`, yaml.stringify(servicejson));
     }
   } catch (error: any) {
     console.error(error.message);
