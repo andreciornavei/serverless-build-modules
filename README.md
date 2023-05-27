@@ -219,3 +219,33 @@ resources:
 For this scenario, the module becomes readable and maintainable, and on the build moment, after run `serverless-build-module` we got the same result as `complex-serverless.yml` ready to be deployed.
 
 > On this project [example directory](https://github.com/andreciornavei/serverless-build-modules/tree/main/example), you can find a complex implementation scenario making use of `serverless-compose`, a shared resources service and another service with two separated modules.
+
+---
+
+## # the relative path resolver
+
+Relative path resolver is used to adjust relative paths from module to its serverless.yml parent, it grants that built serverless.yml keep looking to the right file paths.
+
+Example:
+##### `src/modules/module_a/serverless.m.yml`
+```yml
+functions:
+  module-fn-name:
+    handler: index.handler   
+```
+Then after built, it will look like:
+##### `src/serverless.yml`
+```yml
+functions:
+  module-fn-name:
+    handler: modules/module_a/index.handler   
+```
+
+For while, this library support resolver for the following relative paths:
+
+```yml
+- functions.*.handler # all function handle paths
+- provider.ecr.images.*.path # docker ecr image path on provider
+```
+
+**!!! if you find and need to implement more relative path mappings contact, me via github repo.**
