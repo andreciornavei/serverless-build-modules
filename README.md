@@ -32,7 +32,7 @@ npm install -g serverless-build-modules
 $ serverless-build-modules --file serverless.yml
 ```
 
-3 - !!! IMPORTANT !!! - To test library in development you __must__ to use the `--dev` flag, it will create a `serverless.build.yml` file to check if is everything ok instead of override your original serverless.yml file
+3 - **!!! IMPORTANT !!!** - To test library in development you __must__ to use the `--dev` flag, it will create a `serverless.build.yml` file to check if is everything ok instead of override your original serverless.yml file
 ```sh
 $ serverless-build-modules --file serverless.yml --dev
 ```
