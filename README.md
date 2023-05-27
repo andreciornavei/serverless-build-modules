@@ -248,4 +248,4 @@ For while, this library support resolver for the following relative paths:
 - provider.ecr.images.*.path # docker ecr image path on provider
 ```
 
-**!!! if you find and need to implement more relative path mappings contact, me via github repo.**
+**!!! if you find and need to implement more relative path mappings, contact me via github repo.**
