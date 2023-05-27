@@ -1,11 +1,12 @@
 {
   "name": "serverless-build-modules",
   "description": "A cli that build a single serverless file from different modular sls files",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "main": "index.js",
   "license": "ISC",
+  "type": "module",
   "scripts": {
-    "build": "rollup -c --bundleConfigAsCjs",
+    "build": "rm -rf ./bin && rollup -c",
     "watch": "rollup -c --watch",
     "develop": "tsx src/index.ts --file ../example/serverless-compose.yml",
     "release": "npm publish --access public"
