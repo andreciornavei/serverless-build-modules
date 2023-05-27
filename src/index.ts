@@ -9,22 +9,15 @@ import { exit } from 'process';
 import deepmerge from 'deepmerge';
 import { list } from 'wild-wild-path';
 import { hideBin } from 'yargs/helpers';
-import { resolve, dirname, relative, join } from 'path';
+import { resolve, dirname, relative, join, basename } from 'path';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-import fileDirName from './utils';
 
 import { parseTags } from './tags';
 import { CliArgsType } from './types';
-const { __dirname } = fileDirName(import.meta);
 
 // get all provided arguments
 const args = yargs(hideBin(process.argv)).argv as unknown as CliArgsType;
 const errors: Array<string> = [];
-
-// // validte required arguments
-// if (!args.file) {
-//   errors.push('--file argument required');
-// }
 
 // exit error if exists some validation error
 if (errors.length > 0) {
@@ -35,6 +28,9 @@ if (errors.length > 0) {
 // execute cli function
 (async () => {
   try {
+    const __dirname = shell.pwd().stdout;
+    console.log('entrypoint execution directory', __dirname);
+
     // 1) try to access specific sls filename provided by args or serverless.yml by default
     let filename = args.file ?? 'serverless.yml';
     if (!existsSync(resolve(__dirname, filename))) filename = 'serverless-compose.yml';
@@ -42,6 +38,11 @@ if (errors.length > 0) {
 
     // 2) get basepath from filename with resolve dirname
     const rootpath = dirname(resolve(__dirname, filename));
+    console.log('service root directory', rootpath);
+
+    // remove any path from filename if provided by arg --file
+    // because from now on, it will be joined with rootpath
+    filename = basename(filename);
 
     // 3) convert serverless (single sls) to array, or capture sls files on serverless-compose paths as array
     const data = readFileSync(resolve(rootpath, filename), { encoding: 'binary' });
