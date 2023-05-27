@@ -41,10 +41,6 @@ if (errors.length > 0) {
     // 2) get basepath from filename with resolve dirname
     const rootpath = dirname(resolve(__dirname, filename));
 
-    // 2) get .env path (if exists) to be copied on each service build
-    let dotenv: string | undefined = resolve(rootpath, args.dotenv ?? '.env');
-    if (!existsSync(dotenv)) dotenv = undefined;
-
     // 3) convert serverless (single sls) to array, or capture sls files on serverless-compose paths as array
     const data = readFileSync(resolve(rootpath, filename), { encoding: 'binary' });
     const json = yaml.parse(data);
