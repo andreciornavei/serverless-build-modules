@@ -8,7 +8,7 @@ This cli package was created to turn able the modularization of your serverless 
 
 In the most cases when we are designing our service architecture in serverless, it got a lot of configurations that can easily grow up for each new function added to the serverless file, and at a certain point that files becomes unreadable.
 
-Of corse, we can make use of `serverless-compose` to breake our entire architecture in multiple services, but even so, more specific services can end up growing a lot depending on the amount of functions and associated resources at this context.
+Of course, we can make use of `serverless-compose` to breake our entire architecture in multiple services, but even so, more specific services can end up growing a lot depending on the amount of functions and associated resources at this context.
 
 Then we introduce the `serverless-build-module`, that allows you to break theses service in modules, where your can define a single function and only the specific resources associated to this function, but that still belongs to the same service, keeping smaller and legible files. When you're done, this cli will merge all modules in a single sls file to be deployed by serverless.
 
