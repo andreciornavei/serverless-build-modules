@@ -37,7 +37,7 @@ $ serverless-build-modules --file serverless.yml
 $ serverless-build-modules --file serverless.yml --dev
 ```
 
-> ##### When this command runs, it will merge all serverless.m.yml files into existent serverless.yml files, so keep in mind to just run this command on your CI/CD pipeline, otherelse it will override your original serverless files in development if you not provided the --dev flag.
+> ##### When this command runs, it will merge all serverless.m.yml files into existent serverless.yml files, so keep in mind to just run this command on your CI/CD pipeline, otherelse it will override your original serverless files in development if you not provide the --dev flag.
 
 
 ---
