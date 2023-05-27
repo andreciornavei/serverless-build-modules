@@ -213,4 +213,4 @@ resources:
 
 For this scenario, the module becomes readable and maintainable, and on the build moment, after run `serverless-build-module` we got the same result as `complex-serverless.yml` ready to be deployed.
 
-> On this project [exampel directory](https://github.com/andreciornavei/serverless-build-modules/tree/main/example), you can find a complex implementation scenario making use of `serverless-compose`, a shared resources service and another service with two separated modules.
+> On this project [example directory](https://github.com/andreciornavei/serverless-build-modules/tree/main/example), you can find a complex implementation scenario making use of `serverless-compose`, a shared resources service and another service with two separated modules.
