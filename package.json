@@ -1,7 +1,7 @@
 {
   "name": "serverless-build-modules",
   "description": "A cli that build a single serverless file from different modular sls files",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "main": "index.js",
   "license": "ISC",
   "scripts": {
@@ -24,7 +24,7 @@
     "nodejs",
     "javascript"
   ],
-  "homepage": "https://github.com/andreciornavei/serverless-build-modular#readme",
+  "homepage": "https://github.com/andreciornavei/serverless-build-modules#readme",
   "author": {
     "name": "André Ciornavei",
     "email": "andre.ciornavei@gmail.com",
@@ -38,11 +38,11 @@
     }
   ],
   "bugs": {
-    "url": "https://github.com/andreciornavei/serverless-build-modular/issues"
+    "url": "https://github.com/andreciornavei/serverless-build-modules/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andreciornavei/serverless-build-modular.git"
+    "url": "git+https://github.com/andreciornavei/serverless-build-modules.git"
   },
   "dependencies": {
     "glob": "10.2.6",
