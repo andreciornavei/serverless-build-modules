@@ -6,7 +6,7 @@ This cli package was created to turn able the modularization of your serverless 
 
 ## # the problematic:
 
-In the most cases when we are designing our service architecture in serverless, it got a lot of configurations that can easily grow up for each new function added to the serverless file, and at a certain point that files becomes ineligible.
+In the most cases when we are designing our service architecture in serverless, it got a lot of configurations that can easily grow up for each new function added to the serverless file, and at a certain point that files becomes unreadable.
 
 Of corse, we can make use of `serverless-compose` to breake our entire architecture in multiple services, but even so, more specific services can end up growing a lot depending on the amount of functions and associated resources at this context.
 
@@ -26,13 +26,13 @@ With this in mind, you just need to:
 npm install -g serverless-build-modules
 ```
 
-2 - Run the lib command before run `serverless deploy`
+2 - Run the cli command before run `serverless deploy`
 
 ```sh
 $ serverless-build-modules --file serverless.yml
 ```
 
-##### When this command runs, it will merge all serverless.m.yml files into existent serverless.yml files, so keep in mind to just run this command on your CI/CD pipeline, otherelse it will override your original serverless files in development.
+> ##### When this command runs, it will merge all serverless.m.yml files into existent serverless.yml files, so keep in mind to just run this command on your CI/CD pipeline, otherelse it will override your original serverless files in development.
 
 
 ---
@@ -59,7 +59,7 @@ Imagine you have a serverless file with 3 functions and for each function, attac
 
 ##### `complex-serverless.yml`
 ```yml
-service: simple-service
+service: complex-service
 
 provider:
   name: aws
@@ -125,7 +125,7 @@ resources:
         QueueName: module-c-dlq
 ```
 
-It is not hard to see that how much more implementations you have on the service, more complex and unreadable it becomes. Then with this library we can split it no modules to keep more simple and readable.
+It is not hard to see that how much more implementations you have on the service, more complex and unreadable it becomes. Then with this library we can split it on modules to keep more simple and readable.
 
 ##### `src/serverless.yml`
 ```yml
@@ -211,6 +211,6 @@ resources:
         QueueName: module-c-dlq
 ```
 
-For this scenario, the module becomes readable and maintable, and on the build moment, after run `serverless-build-module` we got the same result as `complex-serverless.yml` ready to be deployed.
+For this scenario, the module becomes readable and maintainable, and on the build moment, after run `serverless-build-module` we got the same result as `complex-serverless.yml` ready to be deployed.
 
-> On this project [exampel directory](https://github.com/andreciornavei/serverless-build-modules/tree/main/example), you can find a complex implementation scenario making use of `serverles-compose`, a shared resources service and another service with two separated modules.
+> On this project [exampel directory](https://github.com/andreciornavei/serverless-build-modules/tree/main/example), you can find a complex implementation scenario making use of `serverless-compose`, a shared resources service and another service with two separated modules.
