@@ -1,0 +1,21 @@
+provider:
+  ecr:
+    images:
+      app-server:
+        path: ./../../../../app
+        file: Dockerfile
+
+functions:
+  function-module-b:
+    image:
+      name: app-server
+      command: 'build/src/functions/fn-module-b.handle'
+    name: ${self:provider.stage}-app-fn-module-b
+    events:
+      - s3:
+          existing: true
+          forceDeploy: true
+          bucket: !Ref SharedAppBucket
+          event: s3:ObjectCreated:*
+          rules:
+            - prefix: uploads/

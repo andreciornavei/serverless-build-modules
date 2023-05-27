@@ -1,0 +1,7 @@
+node_modules
+.env
+.build
+bin
+migration.json
+.DS_Store
+serverless.build.yml

@@ -1,0 +1,3 @@
+functions:
+  function-shared-module-a:
+    handler: function.handler   

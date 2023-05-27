@@ -1,0 +1,30 @@
+service: service-one
+
+plugins:
+  - serverless-dotenv-plugin
+  - serverless-prune-plugin
+
+custom:
+  prune:
+    automatic: true
+    number: 3
+
+provider:
+  name: aws
+  stage: ${opt:stage, 'development'}
+
+resources:
+  Resources:
+    SharedAppBucket:
+      Type: AWS::S3::Bucket
+      Properties:
+        BucketName: ${env:AWS_S3_BUCKET_NAME}
+        CorsConfiguration:
+          CorsRules:
+            - AllowedOrigins:
+                - "*"
+              AllowedMethods:
+                - GET
+                - POST
+              AllowedHeaders:
+                - "*"

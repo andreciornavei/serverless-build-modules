@@ -1,0 +1,22 @@
+functions:
+  function-module-a:
+    handler: funcs/function.handler   
+    events:
+      - sqs:
+          arn: !GetAtt HandleExecutionQueue.Arn
+          batchSize: 1
+
+resources:
+  Resources:
+    HandleExecutionQueue:
+      Type: "AWS::SQS::Queue"
+      Properties:
+        QueueName: function-module-a-queue-${self:provider.stage}
+        VisibilityTimeout: 360
+        RedrivePolicy:
+          deadLetterTargetArn: !GetAtt HandleExecutionDeadLetterQueue.Arn
+          maxReceiveCount: 10
+    HandleExecutionDeadLetterQueue:
+      Type: AWS::SQS::Queue
+      Properties:
+        QueueName: function-module-a-queue-${self:provider.stage}-dlq

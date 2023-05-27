@@ -1,0 +1,7 @@
+services:
+
+  shared:
+    path: services
+
+  propositions:
+    path: services/service_one
