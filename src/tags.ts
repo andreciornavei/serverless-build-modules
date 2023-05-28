@@ -13,4 +13,10 @@ export const parseTags: Tags = [
       return { GetAtt: value };
     },
   },
+  {
+    tag: '!Sub',
+    resolve: (value: any) => {
+      return { Sub: value }
+    }
+  }
 ];
