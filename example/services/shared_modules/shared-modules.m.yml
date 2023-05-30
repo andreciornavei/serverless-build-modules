@@ -1,3 +1,26 @@
 functions:
   function-shared-module-a:
     handler: function.handler   
+
+resources:
+  Resources:
+    ## ***************************************** ##
+    ## ALLOW ANY EVENT BRIDGE TO PUBLISH SQS  ** ##
+    ## ***************************************** ##
+    EventBridgeToSqsPolicy:
+      Type: AWS::SQS::QueuePolicy
+      Properties:
+        PolicyDocument:
+          Statement:
+            - Sid: "Allow Event Bridge publish to SQS"
+              Effect: "Allow"
+              Resource:
+                - !GetAtt HandleExecutionQueueA.Arn
+                - !GetAtt HandleExecutionQueueB.Arn
+              Principal:
+                Service:
+                  - "events.amazonaws.com"
+              Action: SQS:SendMessage
+        Queues:
+          - Ref: HandleExecutionQueueA
+          - Ref: HandleExecutionQueueB
