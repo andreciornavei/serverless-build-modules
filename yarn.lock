@@ -2674,7 +2674,7 @@ wild-wild-parser@^4.0.0:
   resolved "https://registry.yarnpkg.com/wild-wild-parser/-/wild-wild-parser-4.0.0.tgz#31763aba182ff0b31704cb8031cbe9b49b4423b4"
   integrity sha512-budu64hUDKRzh5yDe8T9Rxgwvz1JCWbea/3u7/D6uNPqE00J+hm0kNZhpFfCGgKkUhDKL47Jci9oPBHRKbO+oA==
 
-wild-wild-path@^4.0.0:
+wild-wild-path@4.0.0:
   version "4.0.0"
   resolved "https://registry.yarnpkg.com/wild-wild-path/-/wild-wild-path-4.0.0.tgz#7c59da08e65248c02539fedd519381c6737e2b78"
   integrity sha512-uXJ5cRet416kOLSAoUzHQx4B3kFL39o1pkw3/KjKf2c1UWi094JIEfC2Gh6NWYb3RWlEZuD3p6S0j0VUYZsAbw==

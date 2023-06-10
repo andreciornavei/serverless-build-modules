@@ -11,9 +11,9 @@ import { list } from 'wild-wild-path';
 import { hideBin } from 'yargs/helpers';
 import { resolve, dirname, relative, join, basename } from 'path';
 import { existsSync, readFileSync, writeFileSync } from 'fs';
-
-import { parseTags } from './tags';
+import { customTags } from './tags';
 import { CliArgsType } from './types';
+import { removeQuotes, removeTagQuotes } from "./utils"
 
 // get all provided arguments
 const args = yargs(hideBin(process.argv)).argv as unknown as CliArgsType;
@@ -28,12 +28,14 @@ if (errors.length > 0) {
 // execute cli function
 (async () => {
   try {
-    // det devmode
+
+    // get devmode
     const devmode = args.dev || false;
     console.log('devmode =', String(devmode));
 
     const __dirname = shell.pwd().stdout;
     console.log('entrypoint execution directory', __dirname);
+
 
     // 1) try to access specific sls filename provided by args or serverless.yml by default
     let filename = args.file ?? 'serverless.yml';
@@ -50,7 +52,7 @@ if (errors.length > 0) {
 
     // 3) convert serverless (single sls) to array, or capture sls files on serverless-compose paths as array
     const data = readFileSync(resolve(rootpath, filename), { encoding: 'binary' });
-    const json = yaml.parse(data);
+    const json = yaml.parse(data, { customTags });
     const paths: string[] = [];
     if (_.has(json, 'service')) paths.push(resolve(rootpath));
     if (_.has(json, 'services')) {
@@ -68,7 +70,7 @@ if (errors.length > 0) {
       // load service json
       const servicefile = resolve(servicepath, 'serverless.yml');
       const servicedata = readFileSync(servicefile, { encoding: 'binary' });
-      let servicejson = yaml.parse(servicedata, { customTags: parseTags });
+      let servicejson = yaml.parse(servicedata, { customTags });
 
       // clean build file before starting build (only in devmode)
       if (devmode) await shell.exec(`rm ${resolve(servicepath, 'serverless.build.yml')}`);
@@ -82,7 +84,7 @@ if (errors.length > 0) {
       });
       for (const module of modules) {
         const moduledata = readFileSync(module, { encoding: 'binary' });
-        const modulejson = yaml.parse(moduledata, { customTags: parseTags });
+        const modulejson = yaml.parse(moduledata, { customTags });
 
         // get the diff path between servicepath and modulepath
         const diffpath = join(servicepath, relative(servicepath, dirname(module)));
@@ -104,12 +106,12 @@ if (errors.length > 0) {
             _.set(modulejson, occurrence.path.join('.'), relativepath);
           }
         }
-
         // merge module to service object
         servicejson = deepmerge(servicejson, modulejson);
       }
       // convert json to yml [add .build suffix if devmode is enabled]
-      writeFileSync(`${resolve(servicepath, `serverless${devmode ? '.build' : ''}.yml`)}`, yaml.stringify(servicejson));
+      const builtYaml = yaml.stringify(servicejson, {blockQuote:false, keepSourceTokens: true})
+      writeFileSync(`${resolve(servicepath, `serverless${devmode ? '.build' : ''}.yml`)}`, removeTagQuotes(builtYaml));
     }
   } catch (error: any) {
     console.error(error.message);
