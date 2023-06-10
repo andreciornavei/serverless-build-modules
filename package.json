@@ -1,7 +1,7 @@
 {
   "name": "serverless-build-modules",
   "description": "A cli that build a single serverless file from different modular sls files",
-  "version": "1.0.18",
+  "version": "1.0.20",
   "main": "index.js",
   "license": "ISC",
   "type": "module",
@@ -51,7 +51,7 @@
     "glob": "10.2.6",
     "lodash": "4.17.21",
     "shelljs": "0.8.5",
-    "wild-wild-path": "^4.0.0",
+    "wild-wild-path": "4.0.0",
     "yaml": "2.3.0",
     "yargs": "17.7.2"
   },
