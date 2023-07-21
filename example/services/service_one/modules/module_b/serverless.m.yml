@@ -11,6 +11,12 @@ functions:
       name: app-server
       command: 'build/src/functions/fn-module-b.handle'
     name: ${self:provider.stage}-app-fn-module-b
+    package:
+      include:
+        - ./**/*.js
+        - ../../../libs/**/*.js
+        - ../../node_modules/**
+        - ../../package.json
     events:
       - s3:
           existing: true

@@ -9,7 +9,7 @@
     "build": "rm -rf ./bin && rollup -c",
     "watch": "rollup -c --watch",
     "predevelop": "rm -rf _devrun && cp -R example _devrun",
-    "develop": "tsx src/index.ts --file ./_devrun/serverless-compose.yml",
+    "develop": "tsx src/index.ts --file ./example/serverless-compose.yml --dev",
     "release": "npm publish --access public"
   },
   "bin": {

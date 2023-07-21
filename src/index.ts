@@ -92,7 +92,7 @@ if (errors.length > 0) {
         // check each module file for configs with related paths
         // and adjust its pathlevel based on root serverless file
         // to keep looking to the right path. (where the module will be merged)
-        const resolve_paths = ['functions.*.handler', 'provider.ecr.images.*.path'];
+        const resolve_paths = ['functions.*.handler', 'provider.ecr.images.*.path', 'functions.*.package.include.*'];
 
         // move path forward/backword according diffpath between module and service
         for (const prop of resolve_paths) {
