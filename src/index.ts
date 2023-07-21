@@ -110,7 +110,7 @@ if (errors.length > 0) {
         servicejson = deepmerge(servicejson, modulejson);
       }
       // convert json to yml [add .build suffix if devmode is enabled]
-      const builtYaml = yaml.stringify(servicejson, {blockQuote:false, keepSourceTokens: true})
+      const builtYaml = yaml.stringify(servicejson, {blockQuote:false, keepSourceTokens: true, version:"1.1"})
       writeFileSync(`${resolve(servicepath, `serverless${devmode ? '.build' : ''}.yml`)}`, removeTagQuotes(builtYaml));
     }
   } catch (error: any) {
